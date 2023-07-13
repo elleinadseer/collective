@@ -8,11 +8,12 @@ let charLimit = {
 const getCharLimit = () => {
   const currentTime = dayjs();
 
-  // Check if a character limit exists and was generated within the last 24 hours
+  // Check if a character limit exists and when it was generated
   if (charLimit.value !== null && charLimit.generatedAt !== null) {
     const storedTime = dayjs(charLimit.generatedAt);
     const timeDiff = currentTime.diff(storedTime, 'second');
 
+    // Keep current charLimit while time passed is less than the specified time
     if (timeDiff < 5) {
       return charLimit.value;
     }
