@@ -1,3 +1,4 @@
+/* 
 const router = require('express').Router();
 const { restart } = require('nodemon');
 const { Category, Product } = require('../../models');
@@ -92,3 +93,4 @@ router.delete('/:id', async (req, res) => {
 });
 
 module.exports = router;
+*/
