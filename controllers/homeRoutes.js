@@ -70,4 +70,23 @@ router.get('/profile', withAuth, async (req, res) => {
   }
 });
 
+router.get('/user/:user_id', async (req, res) => {
+  try {
+    const userData = await User.findByPk(req.params.user_id, {
+      attributes: { exclude: ['user_password'] },
+      include: [{ model: Post }, { model: Comment }],
+    });
+
+    const user = userData.get({ plain: true });
+
+    // Maybe swap this out for a seperate 'user' view?
+    res.render('profile', {
+      ...user,
+      logged_in: req.session.logged_in,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 module.exports = router;
