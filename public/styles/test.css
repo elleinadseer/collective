@@ -1,0 +1,98 @@
+:root{
+    /* --dark: rgb(#27293f);
+    --mid: rgb(#34364b); */
+    --dark: rgb(39,41,64);
+    --mid: rgb(52,54,75);
+    --light: rgb(83, 83, 114);
+    --white: white;
+    --bs-body-line-height: 1.1;
+  }
+    
+  * {
+    margin: 0;
+    padding: 0;
+    font-family: "Roboto Flex", Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    background-color: var(--dark);
+    color: white;
+  }
+
+  .header-flex {
+    display: flex;
+    justify-content: center;
+  }
+
+  header {
+    width: 68%;
+    height: 100px;
+    background-color: var(--mid);
+    margin-top: 30px;
+  }
+
+  header img {
+    background-color: var(--mid);
+  }
+  
+  .content-flex {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .main-sec {
+    width: 35%;
+    height: 400px;
+    margin-top: 30px;
+    background-color: var(--mid);
+  }
+
+  .user-sec, .trending-sec {
+    width: 15%;
+    height: 400px;
+    margin-top: 30px;
+    background-color: var(--mid);
+    border: solid 1px var(--light);
+    border-radius: 10px;
+  }
+  
+  h2 {
+    text-align: center;
+    color: red;
+    margin-top: 10px;
+  }
+  
+  h6 {text-align: center;
+    color: red;
+    text-transform: capitalize;
+  }
+
+
+
+  /*
+
+    .top {padding: 10px;}
+
+    
+  
+  /* Button code 
+  .button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 5px;
+  }
+  
+  .hideBTN {
+    background: white;
+    color: red;
+    border: solid 1px red;
+    border-radius: 60px;
+    padding: 3px 7px 3px 7px;
+  }
+  
+  button {
+    margin:6px;
+    font-size: 12px;
+  }
+
+  */
