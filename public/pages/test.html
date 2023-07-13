@@ -5,37 +5,61 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="/public/styles/test.css">
+    <link rel="stylesheet" href="/public/styles/test.css" />
 
-    <title>tl;dr - the tech</title>
+    <title>tl;dr - the no fuss tech forum</title>
   </head>
 
   <body>
+    <section>
+      <header class="header-section">
+          <img class="logo" src="/public/images/collectivelogo.png" />
+      </header>
+    </section>
 
-   <section class="header-flex">
-   <header>
-    <img src="/public/images/collectivelogo.png" alt="tl;dr logo" width="150" height="100">
-    log in / sign up
-   </header>
-   </section>
+    <section class="row">
 
-   <section class="content-flex">
-   <section class="user-sec">@danielle</section>
+      <div class="left">
+      <section class="user-sec">
+        <button>Log In</button>
+          <button>Sign Up</button>
+      </section>
+    </div>
 
-   <section class="main-sec">
-    Posts:
-    <span id="likeCount"></span>
-    <button id="likeButton">Like</button>
+    <div class="center">
+        
+    
+      <section class="main-sec">
+        
+        <button class="likeButton">Like</button>
+        <p class="main-sec-user">@danielle99</p>
+        <p class="main-sec-post">Suspendisse placerat pellentesque est ut rhoncus. Integer magna dui, tempor et malesuada a, dictum in libero. Nulla mollis nec odio sed facilisis. Curabitur lacinia ligula arcu, sed pellentesque risus accumsan feugiat.</p>
+        <!-- <span id="likeCount"></span> -->
+        <p class="main-sec-interact">3m ago</p>
+        
+      </section>
 
-    <p>Hello - @danielle<br>
-        3m ago<br>
-        #general
-    </p>
-   </section>
+      <section class="main-sec">
+        
+        <!-- <button class="likeButton">Like</button> -->
+        <p class="main-sec-user">@dylan44</p>
+        <p class="main-sec-post">Suspendisse placerat pellentesque est ut rhoncus. Integer magna dui, tempor et malesuada a, dictum in libero. Nulla mollis nec odio sed facilisis. Curabitur lacinia ligula arcu, sed pellentesque risus accumsan feugiat.</p>
+        <!-- <span id="likeCount"></span> -->
+        <p class="main-sec-interact">10m ago</p>
+        
+      </section>
 
-   <section class="trending-sec">Trending:</section>
-   </section>
+    </div>
 
+      <div class="right">
+      <section class="trending-sec">Trending:</section>
+    </section>
+  </div>
+
+    <footer>
+      <p>&copy; 2023 tl;dr</p>
+    </footer>
   </body>
 
   <script src="/public/scripts/test.js"></script>
+</html>
