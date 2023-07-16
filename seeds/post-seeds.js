@@ -1,8 +1,5 @@
 const router = require('express').Router();
 
-// Import the model
-// const Post = require('../../models/Post');
-
 const { Post } = require('../models');
 
 const postData = [

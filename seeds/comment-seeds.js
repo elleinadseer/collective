@@ -1,8 +1,5 @@
 const router = require('express').Router();
 
-// Import the model
-// const Comment = require('models/Comment.js');
-
 const { Comment } = require('../models');
 
 const commentData = [
