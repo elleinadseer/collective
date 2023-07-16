@@ -1,4 +1,4 @@
-const tipForm = document.getElementById('tip-form');
+/* const tipForm = document.getElementById('tip-form');
 const tipsContainer = document.getElementById('tip-container');
 const fbBtn = document.getElementById('feedback-btn');
 
@@ -157,3 +157,4 @@ const handleFormSubmit = (e) => {
 
 // Listen for when the form is submitted
 tipForm.addEventListener('submit', handleFormSubmit);
+ */

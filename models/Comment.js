@@ -13,9 +13,20 @@ Comment.init(
         autoIncrement: true
       },
       user_id: {
-        // Need to connect between user_ID and comment_ID
         type: DataTypes.INTEGER,
         allowNull: false,
+        references: {
+          model: 'user',
+          key: 'user_id',
+        }
+      },
+      post_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'post',
+          key: 'post_id',
+        }
       },
       comment_text: {
         type: DataTypes.STRING,
