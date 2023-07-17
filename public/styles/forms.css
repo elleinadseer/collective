@@ -7,10 +7,9 @@
     --white: white;
     --bs-body-line-height: 1.1;
   }
-  
+
   body {
     font-family: "Roboto Flex", Arial, Helvetica, sans-serif;
-    background-color: var(--dark);
     margin: 0;
     padding: 0;
     height: 100px;
