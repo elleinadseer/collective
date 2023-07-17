@@ -3,7 +3,7 @@ const User = require('./User');
 const Post = require('./Post');
 const Comment = require('./Comment');
 
-// Products belongsTo Category
+/* / Products belongsTo Category
 Product.belongsTo(Category, {
   foreignKey: 'category_id',
   onDelete: 'CASCADE',
@@ -24,7 +24,7 @@ Product.belongsToMany(Tag, {
 Tag.belongsToMany(Product, {
   through: ProductTag,
   foreignKey: 'tag_id',
-});
+}); */
 
 module.exports = {
   User,
