@@ -8,18 +8,37 @@
   --bs-body-line-height: 1.1;
 }
 
+header {
+  /* background-color: var(--mid); */
+ 
+  padding: 10px;
+  margin-top: 10px;
+}
+
 body {
-  font-family: "Roboto Flex", Arial, Helvetica, sans-serif;
+  font-family: Helvetica, sans-serif;
   background-color: var(--dark);
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+
   height: 100px;
 }
 
+
+.logo {
+  max-width: 140px;
+  padding: 10px;
+  background-color: transparent;
+}
+
+.center {
+  flex: 50%;
+  
+}
+
 .container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
   width: 300px;
   padding: 20px;
   background-color: var(--mid);
@@ -39,12 +58,13 @@ h2 {
 .form-group label {
   display: block;
   font-weight: bold;
-  margin-bottom: 5px;
+  margin: 5px;
+  color: white;
 }
 
 .form-group input {
-  width: 100px;
-  padding: 8px;
+  width: 300px;
+  padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
