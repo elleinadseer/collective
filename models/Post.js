@@ -13,9 +13,12 @@ Post.init(
       autoIncrement: true
     },
     user_id: {
-      // Need to connect between user_ID and post_ID
       type: DataTypes.INTEGER,
       allowNull: false,
+      references: {
+        model: 'user',
+        key: 'user_id',
+    },
     },
     post_title: {
       type: DataTypes.STRING,
@@ -32,8 +35,10 @@ Post.init(
     likes: {
       type: DataTypes.INTEGER,
     }
-    // tag_id: .INTEGER,
-    // Allow user to choose tag from front end then coventry to a tag_id
+    /* tag-id: {
+      type: DataTypes.INTEGER,
+    }
+    Allow user to choose tag from front end then convert to a tag_id */
   },
   {
     sequelize,

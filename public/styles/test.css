@@ -145,21 +145,16 @@ padding: 10px;
 
 h2 {
   text-align: center;
-  color: red;
   margin-top: 10px;
 }
 
 h6 {
   text-align: center;
-  color: red;
   text-transform: capitalize;
 }
 
 /*
-
     .top {padding: 10px;}
-
-    
   
   /* Button code 
   .button-container {
