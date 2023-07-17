@@ -43,11 +43,17 @@ User.init(
   {
     hooks: {
       beforeCreate: async (newUserData) => {
-        newUserData.password = await bcrypt.hash(newUserData.password, 10);
+        newUserData.user_password = await bcrypt.hash(
+          newUserData.user_password,
+          10
+        );
         return newUserData;
       },
       beforeUpdate: async (updatedUserData) => {
-        updatedUserData.password = await bcrypt.hash(updatedUserData.password, 10);
+        updatedUserData.user_password = await bcrypt.hash(
+          updatedUserData.user_password,
+          10
+        );
         return updatedUserData;
       },
     },
@@ -60,5 +66,3 @@ User.init(
 );
 
 module.exports = User;
-
-
