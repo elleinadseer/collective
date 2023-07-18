@@ -1,0 +1,10 @@
+<div class="user">
+  {{#if isLoggedIn}}
+    <!-- User is logged in, show Log Out button -->
+    <button><a href="./logout">Log Out</a></button>
+  {{else}}
+    <!-- User is not logged in, show Log In and Sign Up buttons -->
+    <button><a href="./login">Log In</a></button>
+    <button><a href="./signup">Sign Up</a></button>
+  {{/if}}
+</div>
