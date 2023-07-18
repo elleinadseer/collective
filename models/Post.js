@@ -10,7 +10,7 @@ Post.init(
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
-      autoIncrement: true
+      autoIncrement: true,
     },
     user_id: {
       type: DataTypes.INTEGER,
@@ -18,23 +18,24 @@ Post.init(
       references: {
         model: 'user',
         key: 'user_id',
-    },
+      },
     },
     post_title: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
     post_content: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
     created_at: {
       type: DataTypes.DATE,
-      defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
+      defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
     },
     likes: {
       type: DataTypes.INTEGER,
-    }
+      defaultValue: 0,
+    },
     /* tag-id: {
       type: DataTypes.INTEGER,
     }
