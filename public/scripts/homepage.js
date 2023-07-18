@@ -17,13 +17,12 @@ const logoutHandler = async (event) => {
 const newPostHandler = async (event) => {
   event.preventDefault();
 
-  const text = document.querySelector('#post-text').value.trim();
-  console.log(text);
+  const post_content = document.querySelector('#post-text').value.trim();
 
-  if (text) {
+  if (post_content) {
     const response = await fetch(`/api/posts`, {
       method: 'POST',
-      body: JSON.stringify({ text }),
+      body: JSON.stringify({ post_content }),
       headers: {
         'Content-Type': 'application/json',
       },
