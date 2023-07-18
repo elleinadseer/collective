@@ -14,15 +14,31 @@ router.post('/', withAuth, async (req, res) => {
   }
 });
 
+router.get('/:post_id', async (req, res) => {
+  try {
+    const postData = await Post.findByPk(req.params.post_id);
+
+    !postData
+      ? res.status(404).json({ message: 'No post found with this id!' })
+      : res.status(200).json(postData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 router.put('/:post_id', withAuth, async (req, res) => {
   try {
-    const postData = await Post.update({
-      ...req.body,
-      where: {
-        post_id: req.params.post_id,
-        user_id: req.session.user_id,
+    const postData = await Post.update(
+      {
+        ...req.body,
       },
-    });
+      {
+        where: {
+          post_id: req.params.post_id,
+          user_id: req.session.user_id,
+        },
+      }
+    );
     !postData[0]
       ? res.status(404).json({ message: 'No post found with this id!' })
       : res.status(200).json(postData);
