@@ -5,7 +5,7 @@ const withAuth = require('../../utils/auth');
 router.post('/', withAuth, async (req, res) => {
   try {
     const commentData = await Comment.create({
-      ...req.body,
+      comment_text: req.body.text,
       user_id: req.session.user_id,
     });
     res.status(200).json(commentData);
@@ -30,7 +30,7 @@ router.put('/:comment_id', withAuth, async (req, res) => {
   try {
     const commentData = await Comment.update(
       {
-        ...req.body,
+        comment_text: req.body.text,
       },
       {
         where: {
