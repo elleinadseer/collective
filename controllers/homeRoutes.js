@@ -24,6 +24,15 @@ router.get('/', async (req, res) => {
   }
 });
 
+router.get('/user-menu', async (req, res) => {
+  const user = userData.get({ plain: true });
+
+  // Pass the data to the Handlebars template
+  res.render('user-menu', { 
+    ...user,
+    logged_in: true });
+});
+
 router.get('/post/:post_id', async (req, res) => {
   try {
     const postData = await Post.findByPk(req.params.post_id, {
@@ -46,7 +55,7 @@ router.get('/post/:post_id', async (req, res) => {
       logged_in: req.session.logged_in,
     }); */
 
-    res.render('post', {
+    res.render('thread', {
       ...post,
       logged_in: req.session.logged_in,
     });
