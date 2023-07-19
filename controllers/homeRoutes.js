@@ -5,30 +5,38 @@ const withAuth = require("../utils/auth");
 
 const tags = ["comedy", "general", "help", "discussion"];
 
-router.get("/", async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const postData = await Post.findAll({
       include: [
         {
           model: User,
-          attributes: ["user_name"],
+          attributes: ['user_name'],
         },
       ],
-      order: [["created_at", "DESC"]],
+      order: [['created_at', 'DESC']],
     });
 
     const posts = postData.map((post) => post.get({ plain: true }));
 
-    //const user = await User.findByPk(req.session.user_id);
-    const user = await User.findByPk(1);
-    const loggedOnUser = user.get({ plain: true });
+    if (req.session.logged_in) {
+      const user = await User.findByPk(req.session.user_id);
+      //const user = await User.findByPk(1);
+      const loggedOnUser = user.get({ plain: true });
 
-    res.render("homepage", {
-      posts,
-      logged_in: req.session.logged_in,
-      loggedOnUser,
-      tags,
-    });
+      res.render('homepage', {
+        posts,
+        logged_in: req.session.logged_in,
+        loggedOnUser,
+        tags,
+      });
+    } else {
+      res.render('homepage', {
+        posts,
+        logged_in: req.session.logged_in,
+        tags,
+      });
+    }
   } catch (err) {
     res.status(500).json(err);
   }
