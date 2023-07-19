@@ -19,7 +19,7 @@ if (logoutButton) {
   logoutButton.addEventListener("click", logoutHandler);
 }
 
-function onLikePost(postId) {
+function onLikePost(postId, element) {
   fetch(`/api/posts/like/${postId}`, {
     method: "POST",
     headers: {
@@ -29,6 +29,8 @@ function onLikePost(postId) {
     if (response.ok) {
       response.json().then((data) => {
         document.getElementById(`likes-${postId}`).innerHTML = data.likes;
+
+        element.onclick = null;
       });
       // document.location.reload();
     } else {
@@ -69,3 +71,23 @@ function onSelectTag() {
     postTextEl.value = `${postText} ${selectedTag} `;
   }
 }
+
+
+/*
+function htmlToggle() {
+  var HTML = document.getElementById("comment-btn");
+  if (HTML.style.display === "block") {
+    HTML.style.display = "none";
+  } else {
+    HTML.style.display = "block";
+  } }
+
+const typeOfHide = document.getElementById("comment-btn");
+typeOfSection = document.getElementById("typeof");
+typeOfHide.addEventListener("click", function() {
+if (typeOfSection.style.display === "block") {
+  typeOfSection.style.display = "none";
+} else {
+  typeOfSection.style.display = "block";
+} } ) */
+
