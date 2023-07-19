@@ -20,10 +20,6 @@ Post.init(
         key: 'user_id',
       },
     },
-    post_title: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
     post_content: {
       type: DataTypes.STRING,
       allowNull: false,
