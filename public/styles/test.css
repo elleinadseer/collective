@@ -211,6 +211,10 @@ button {
   margin-bottom: 5px;
 }
 
+#comments-drop {
+  display: none;
+}
+
 button {
   background-color: var(--dark);
 }
