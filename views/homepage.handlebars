@@ -45,6 +45,7 @@
       </div>
     </section>
 
+  {{#if logged_in}}
     <section class='post-sec'>
       <input type='text' id='post-text' class='post-sec-post' />
       <select
@@ -60,6 +61,7 @@
       </select>
       <button id='post-button'>Post</button>
     </section>
+      {{/if}}     
 
     <section class='main-sec'>
       <p class='main-sec-interact'>3m ago</p>
