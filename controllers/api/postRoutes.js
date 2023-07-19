@@ -30,7 +30,7 @@ router.put('/:post_id', withAuth, async (req, res) => {
   try {
     const postData = await Post.update(
       {
-        ...req.body,
+        post_content: req.body.text,
       },
       {
         where: {
