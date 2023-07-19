@@ -67,11 +67,11 @@
       <div class='main-sec-stats'>
         <div class='stat-box' onclick="onLikePost({{post.post_id}}, this);">
           <img class='stat-img' width='20px' src='/images/heart.png' />
-          <p id="likes-{{post.post_id}}">{{post.likes}}</p>
+          <p id="likes-{{post.post_id}}"><span>{{post.likes}}</span></p>
         </div>
-         <div class='stat-box'>
-           <img class='stat-img' id='comment-btn' width='20px' src='/images/comment.png' />
-           <p>10</p>
+        <div class='stat-box'>
+          <img class='cmt-img' id='comment-btn' width='20px' src='/images/comment.png' />
+          <p class='stat-img'>10</p>
         </div>
       </div>
     </section>
@@ -83,18 +83,18 @@
     <section class='trending-sec'>Trending:
 
 {{#each trendingPosts as |trendingPost|}}
-    <section class='main-sec'>
-      <p class='main-sec-interact'>{{format_date trendingPost.created_at}}</p>
+    <section class='trending-main-sec'>
+      <p class='trending-sec-interact'>{{format_date trendingPost.created_at}}</p>
       <!-- <button class="likeButton">Like</button> -->
-      <p class='main-sec-user'><a href="/user/{{trendingPost.user_id}}">@{{trendingPost.user.user_name}}</a></p>
+      <p class='trending-sec-user'><a href="/user/{{trendingPost.user_id}}">@{{trendingPost.user.user_name}}</a></p>
 
-      <p class='main-sec-post'>
+      <p class='trending-sec-post'>
         {{trendingPost.post_content}}
       </p>
 
       <div class='main-sec-stats'>
-        <div class='stat-box' onclick="onLikePost({{trendingPost.post_id}});">
-          <img class='stat-img' width='20px' src='/images/heart.png' />
+        <div class='trending-stat-box' onclick="onLikePost({{trendingPost.post_id}});">
+          <img class='trend-img' width='20px' src='/images/heart.png' />
           <p id="likes-{{trendingPost.post_id}}">{{trendingPost.likes}}</p>
         </div>
       </div>
