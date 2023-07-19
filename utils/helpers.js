@@ -1,4 +1,5 @@
-const dayjs = require('dayjs');
+const dayjs = require("dayjs");
+const relativeTime = require("dayjs/plugin/relativeTime");
 
 let charLimit = {
   value: null,
@@ -11,7 +12,7 @@ const getCharLimit = () => {
   // Check if a character limit exists and when it was generated
   if (charLimit.value !== null && charLimit.generatedAt !== null) {
     const storedTime = dayjs(charLimit.generatedAt);
-    const timeDiff = currentTime.diff(storedTime, 'second');
+    const timeDiff = currentTime.diff(storedTime, "second");
 
     // Keep current charLimit while time passed is less than the specified time
     if (timeDiff < 5) {
@@ -28,4 +29,13 @@ const getCharLimit = () => {
   return charLimit.value;
 };
 
-module.exports = { getCharLimit };
+const format_date = (date) => {
+  return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
+};
+
+const timeago = (timestamp) => {
+  dayjs.extend(relativeTime);
+  return dayjs().fromNow(timestamp);
+};
+
+module.exports = { getCharLimit, format_date, timeago };

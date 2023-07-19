@@ -36,10 +36,10 @@ Post.init(
       type: DataTypes.INTEGER,
       defaultValue: 0,
     },
-    /* tag-id: {
+    tag_id: {
       type: DataTypes.INTEGER,
-    }
-    Allow user to choose tag from front end then convert to a tag_id */
+    },
+    /* Allow user to choose tag from front end then convert to a tag_id */
   },
   {
     sequelize,
