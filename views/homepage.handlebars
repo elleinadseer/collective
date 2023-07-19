@@ -2,15 +2,15 @@
   <div class='left'>
     <section class='user-sec'>
       <div class='user'>
-  {{#if logged_in}}
-    <!-- User is logged in, show Log Out button -->
-    <button id='logout-button'>Log Out</button>
-  {{else}}
-    <!-- User is not logged in, show Log In and Sign Up buttons -->
-    <button><a href="./login">Log In</a></button>
-    <button><a href="./signup">Sign Up</a></button>
-  {{/if}}      
-  </div>
+        {{#if logged_in}}
+          <!-- User is logged in, show Log Out button -->
+          <button id='logout-button'>Log Out</button>
+        {{else}}
+          <!-- User is not logged in, show Log In and Sign Up buttons -->
+          <button><a href='./login'>Log In</a></button>
+          <button><a href='./signup'>Sign Up</a></button>
+        {{/if}}
+      </div>
     </section>
 
     <section class='user-sec'>
@@ -47,7 +47,7 @@
 
   {{#if logged_in}}
     <section class='post-sec'>
-      <input type='text' class='post-sec-post' />
+      <input type='text' id='post-text' class='post-sec-post' />
       <select
         name='category'
         id='category'
@@ -59,7 +59,7 @@
         <option value='#help'>#help</option>
         <option value='#discussion'>#discussion</option>
       </select>
-      <button>Post</button>
+      <button id='post-button'>Post</button>
     </section>
       {{/if}}     
 

@@ -23,6 +23,7 @@ Post.init(
     post_title: {
       type: DataTypes.STRING,
       allowNull: false,
+      defaultValue: 'TEMP',
     },
     post_content: {
       type: DataTypes.STRING,
