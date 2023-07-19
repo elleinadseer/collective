@@ -230,6 +230,10 @@ justify-content: space-around;
 justify-content: space-around;
 }
 
+#comments-drop {
+  display: none;
+}
+
 button {
   background-color: var(--dark);
 }

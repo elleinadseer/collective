@@ -72,6 +72,22 @@ function onSelectTag() {
   }
 }
 
+
+  // Comment drop down section
+
+  document.addEventListener("DOMContentLoaded", function() {
+    var commentBtn = document.getElementById("comment-btn");
+    var commentsDrop = document.getElementById("comments-drop");
+
+    commentBtn.addEventListener("click", function() {
+      if (commentsDrop.style.display === "block") {
+        commentsDrop.style.display = "none";
+      } else {
+        commentsDrop.style.display = "block";
+      }
+    });
+  });
+
 const newCommentHandler = async (event) => {
   event.preventDefault();
 
@@ -121,5 +137,4 @@ const newCommentHandler = async (event) => {
 document
   .querySelector('#logout-button')
   .addEventListener('click', logoutHandler);
-
 
