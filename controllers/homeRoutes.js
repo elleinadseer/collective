@@ -1,49 +1,91 @@
-const router = require('express').Router();
-const { Post, Comment, User } = require('../models');
-const withAuth = require('../utils/auth');
+const router = require("express").Router();
+const { where } = require("sequelize");
+const { Post, Comment, User } = require("../models");
+const withAuth = require("../utils/auth");
 
-router.get('/', async (req, res) => {
+const tags = ["comedy", "general", "help", "discussion"];
+
+router.get("/", async (req, res) => {
   try {
     const postData = await Post.findAll({
       include: [
         {
           model: User,
-          attributes: ['user_name'],
+          attributes: ["user_name"],
         },
       ],
+      order: [["created_at", "DESC"]],
     });
 
     const posts = postData.map((post) => post.get({ plain: true }));
 
-    res.render('homepage', {
+    //const user = await User.findByPk(req.session.user_id);
+    const user = await User.findByPk(1);
+    const loggedOnUser = user.get({ plain: true });
+
+    res.render("homepage", {
       posts,
       logged_in: req.session.logged_in,
+      loggedOnUser,
+      tags,
     });
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-router.get('/user-menu', async (req, res) => {
+router.get("/user/:id", async (req, res) => {
+  try {
+    const postData = await Post.findAll({
+      include: [
+        {
+          model: User,
+          attributes: ["user_name"],
+        },
+      ],
+      where: {
+        user_id: req.params.id,
+      },
+    });
+
+    const posts = postData.map((post) => post.get({ plain: true }));
+
+    //const user = await User.findByPk(req.session.user_id);
+    const user = await User.findByPk(req.params.id);
+    const loggedOnUser = user.get({ plain: true });
+
+    res.render("homepage", {
+      posts,
+      logged_in: req.session.logged_in,
+      loggedOnUser,
+      tags,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get("/user-menu", async (req, res) => {
   const user = userData.get({ plain: true });
 
   // Pass the data to the Handlebars template
-  res.render('user-menu', { 
+  res.render("user-menu", {
     ...user,
-    logged_in: true });
+    logged_in: true,
+  });
 });
 
-router.get('/post/:post_id', async (req, res) => {
+router.get("/post/:post_id", async (req, res) => {
   try {
     const postData = await Post.findByPk(req.params.post_id, {
       include: [
         {
           model: User,
-          attributes: ['user_name'],
+          attributes: ["user_name"],
         },
         {
           model: Comment,
-          attributes: ['comment_text', 'created_at', 'likes'],
+          attributes: ["comment_text", "created_at", "likes"],
         },
       ],
     });
@@ -55,7 +97,7 @@ router.get('/post/:post_id', async (req, res) => {
       logged_in: req.session.logged_in,
     }); */
 
-    res.render('thread', {
+    res.render("thread", {
       ...post,
       logged_in: req.session.logged_in,
     });
@@ -65,17 +107,17 @@ router.get('/post/:post_id', async (req, res) => {
 });
 
 // Use withAuth middleware to prevent access to route
-router.get('/profile', withAuth, async (req, res) => {
+router.get("/profile", withAuth, async (req, res) => {
   try {
     // Find the logged in user based on the session ID
     const userData = await User.findByPk(req.session.user_id, {
-      attributes: { exclude: ['user_password'] },
+      attributes: { exclude: ["user_password"] },
       include: [{ model: Post }, { model: Comment }],
     });
 
     const user = userData.get({ plain: true });
 
-    res.render('profile', {
+    res.render("profile", {
       ...user,
       logged_in: true,
     });
@@ -84,17 +126,17 @@ router.get('/profile', withAuth, async (req, res) => {
   }
 });
 
-router.get('/user/:user_id', async (req, res) => {
+router.get("/user/:user_id", async (req, res) => {
   try {
     const userData = await User.findByPk(req.params.user_id, {
-      attributes: { exclude: ['user_password'] },
+      attributes: { exclude: ["user_password"] },
       include: [{ model: Post }, { model: Comment }],
     });
 
     const user = userData.get({ plain: true });
 
     // Maybe swap this out for a seperate 'user' view?
-    res.render('profile', {
+    res.render("profile", {
       ...user,
       logged_in: req.session.logged_in,
     });
@@ -103,24 +145,24 @@ router.get('/user/:user_id', async (req, res) => {
   }
 });
 
-router.get('/signup', (req, res) => {
+router.get("/signup", (req, res) => {
   // If the user is already logged in, redirect the request to their profile route
   if (req.session.logged_in) {
-    res.redirect('/profile');
+    res.redirect("/profile");
     return;
   }
 
-  res.render('signup');
+  res.render("signup");
 });
 
-router.get('/login', (req, res) => {
+router.get("/login", (req, res) => {
   // If the user is already logged in, redirect the request to their profile route
   if (req.session.logged_in) {
-    res.redirect('/profile');
+    res.redirect("/profile");
     return;
   }
 
-  res.render('login');
+  res.render("login");
 });
 
 module.exports = router;
