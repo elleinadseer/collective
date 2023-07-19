@@ -2,20 +2,22 @@
   <div class='left'>
     <section class='user-sec'>
       <div class='user'>
-    {{#if logged_in}}
-      <!-- User is logged in, show Log Out button -->
-      <button id='logout-button'>Log Out</button>
-    {{else}}
-      <!-- User is not logged in, show Log In and Sign Up buttons -->
-      <button><a href="./login">Log In</a></button>
-      <button><a href="./signup">Sign Up</a></button>
-    {{/if}}      
-  </div>
+        {{#if logged_in}}
+          <!-- User is logged in, show Log Out button -->
+          <button id='logout-button'>Log Out</button>
+        {{else}}
+          <!-- User is not logged in, show Log In and Sign Up buttons -->
+          <button><a href='./login'>Log In</a></button>
+          <button><a href='./signup'>Sign Up</a></button>
+        {{/if}}
+      </div>
     </section>
 
     <section class='user-sec'>
       <div class='user'>
-        <h1><a href="/user/{{loggedOnUser.user_id}}">@{{loggedOnUser.user_name}}</a></h1>
+        <h1><a
+            href='/user/{{loggedOnUser.user_id}}'
+          >@{{loggedOnUser.user_name}}</a></h1>
         <br />
         <p>
           {{loggedOnUser.user_bio}}
@@ -29,52 +31,54 @@
   <div class='center'>
     <section class='cat-sec'>
       {{#each tags}}
-      <div class='cat-box'>
-        <p>#{{this}}</p>
-      </div>
+        <div class='cat-box'>
+          <p>#{{this}}</p>
+        </div>
       {{/each}}
     </section>
 
     {{#if logged_in}}
-    <section class='post-sec'>
-      <input type='text' class='post-sec-post' id="post-text" />
-      <select
-        name='tag-select'
-        id='tag-select'
-        class='post-sec-cat'
-        label='category'
-        onchange="onSelectTag();"
-      >
-        <option value=''>add a tag</option>
-        {{#each tags}}
-        <option value='#{{this}}'>#{{this}}</option>
-        {{/each}}
-      </select>
-      <button id="post-button" onclick="onNewPost();">Post</button>
-    </section>
+      <section class='post-sec'>
+        <input type='text' class='post-sec-post' id='post-text' />
+        <select
+          name='tag-select'
+          id='tag-select'
+          class='post-sec-cat'
+          label='category'
+          onchange='onSelectTag();'
+        >
+          <option value=''>add a tag</option>
+          {{#each tags}}
+            <option value='#{{this}}'>#{{this}}</option>
+          {{/each}}
+        </select>
+        <button id='post-button'>Post</button>
+      </section>
     {{/if}}
 
     {{#each posts as |post|}}
-    <section class='main-sec'>
-      <p class='main-sec-interact'>{{format_date post.created_at}}</p>
-      <!-- <button class="likeButton">Like</button> -->
-      <p class='main-sec-user'><a href="/user/{{post.user_id}}">@{{post.user.user_name}}</a></p>
+      <section class='main-sec'>
+        <p class='main-sec-interact'>{{format_date post.created_at}}</p>
+        <!-- <button class="likeButton">Like</button> -->
+        <p class='main-sec-user'><a
+            href='/user/{{post.user_id}}'
+          >@{{post.user.user_name}}</a></p>
 
-      <p class='main-sec-post'>
-        {{post.post_content}}
-      </p>
+        <p class='main-sec-post'>
+          {{post.post_content}}
+        </p>
 
-      <div class='main-sec-stats'>
-        <div class='stat-box' onclick="onLikePost({{post.post_id}});">
-          <img class='stat-img' width='20px' src='/images/heart.png' />
-          <p id="likes-{{post.post_id}}">{{post.likes}}</p>
+        <div class='main-sec-stats'>
+          <div class='stat-box' onclick='onLikePost({{post.post_id}});'>
+            <img class='stat-img' width='20px' src='/images/heart.png' />
+            <p id='likes-{{post.post_id}}'>{{post.likes}}</p>
+          </div>
+          <div class='stat-box'>
+            <img class='stat-img' width='20px' src='/images/comment.png' />
+            <p>10</p>
+          </div>
         </div>
-        <div class='stat-box'>
-          <img class='stat-img' width='20px' src='/images/comment.png' />
-          <p>10</p>
-        </div>
-      </div>
-    </section>
+      </section>
     {{/each}}
 
   </div>
