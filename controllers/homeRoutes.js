@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { where } = require('sequelize');
-const { Post, Comment, User } = require('../models');
+const { Post, Comment, User, Tag } = require('../models');
 const withAuth = require('../utils/auth');
 
 const tags = ['comedy', 'general', 'help', 'discussion'];
@@ -12,6 +12,10 @@ router.get('/', async (req, res) => {
         {
           model: User,
           attributes: ['user_name'],
+        },
+        {
+          model: Tag,
+          attributes: ['tag_name'],
         },
       ],
       order: [['created_at', 'DESC']],
@@ -50,6 +54,10 @@ router.get('/user/:id', async (req, res) => {
           model: User,
           attributes: ['user_name'],
         },
+        {
+          model: Tag,
+          attributes: ['tag_name'],
+        },
       ],
       where: {
         user_id: req.params.id,
@@ -67,6 +75,40 @@ router.get('/user/:id', async (req, res) => {
       logged_in: req.session.logged_in,
       loggedOnUser,
       tags,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get('/tag/:tag_name', async (req, res) => {
+  try {
+    const postData = await Post.findAll({
+      include: [
+        {
+          model: User,
+          attributes: ['user_name'],
+        },
+        {
+          model: Tag,
+          attributes: ['tag_name'],
+        },
+      ],
+      order: [['created_at', 'DESC']],
+      where: {}, // Empty object for the condition
+    });
+
+    const posts = postData.map((post) => post.get({ plain: true }));
+
+    // Filter posts based on the selected tag
+    const filteredPosts = posts.filter((post) =>
+      post.tags.some((tag) => tag.tag_name === req.params.tag_name)
+    );
+
+    res.render('homepage', {
+      posts: filteredPosts, // Pass the filtered posts to the template
+      logged_in: req.session.logged_in,
+      tags, // Don't forget to pass the tags to the template
     });
   } catch (err) {
     res.status(500).json(err);
