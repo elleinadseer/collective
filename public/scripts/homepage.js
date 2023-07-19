@@ -36,11 +36,15 @@ const newPostHandler = async (event) => {
   event.preventDefault();
 
   const post_content = document.querySelector('#post-text').value.trim();
+  const tag_name = document
+    .querySelector('#tag-select')
+    .value.trim()
+    .replace('#', '');
 
-  if (post_content) {
+  if (post_content && tag_name) {
     const response = await fetch(`/api/posts`, {
       method: 'POST',
-      body: JSON.stringify({ post_content }),
+      body: JSON.stringify({ post_content, tag_name }),
       headers: {
         'Content-Type': 'application/json',
       },
@@ -51,17 +55,10 @@ const newPostHandler = async (event) => {
     } else {
       alert('Failed to create post');
     }
+  } else {
+    alert("Your post is either empty or you haven't selected a tag");
   }
 };
-
-function onSelectTag() {
-  const selectedTag = document.getElementById('tag-select').value;
-  if (selectedTag) {
-    const postTextEl = document.getElementById('post-text');
-    const postText = postTextEl.value.trim();
-    postTextEl.value = `${postText} ${selectedTag} `;
-  }
-}
 
 document
   .querySelector('#post-button')
