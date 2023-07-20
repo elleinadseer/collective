@@ -100,7 +100,6 @@ button {
   margin: 10px;
   background-color: var(--mid);
   border-radius: 7px;
-
 }
 
 .post-sec {
@@ -121,7 +120,6 @@ button {
 }
 
 .main-profile-sec {
-  
   padding: 15px;
   margin: 10px;
   background-color: var(--light);
@@ -130,7 +128,6 @@ button {
 }
 
 .profile-thread-sec {
- 
   padding: 15px;
   padding-bottom: 15px;
   margin: 30px;
@@ -166,13 +163,11 @@ button {
 }
 
 .main-sec-user {
-  
   padding: 5px;
   font-weight: bold;
 }
 
 .main-sec-post {
- 
   /* padding: 5px; */
   width: 100%;
   display: inline-block;
@@ -180,25 +175,20 @@ button {
 }
 
 .main-sec-interact {
-  
   padding: 5px;
   text-align: right;
-  font-family: Georgia, "Times New Roman", Times, serif;
+  font-family: Georgia, 'Times New Roman', Times, serif;
   font-style: italic;
   justify-content: right;
   float: right;
   padding: 10px;
 }
 
-
-
 .main-sec-stats {
   margin-left: 5px;
   margin-top: 20px;
   text-align: left;
 }
-
-
 
 .stat-box {
   /* pre grid display */
@@ -214,19 +204,19 @@ button {
 .stat-img {
   margin-bottom: 5px;
   margin-left: 8px;
-justify-content: space-around;
+  justify-content: space-around;
 }
 
 .trend-img {
   margin-bottom: 5px;
 
-justify-content: space-around;
+  justify-content: space-around;
 }
 
 .cmt-img {
   margin-bottom: 5px;
   margin-left: 13px;
-justify-content: space-around;
+  justify-content: space-around;
 }
 
 #comments-drop {
@@ -272,25 +262,23 @@ button {
 }
 
 .trending-sec-post {
- background-color: var(--light);
- border-radius: 7px;
+  background-color: var(--light);
+  border-radius: 7px;
   padding: 10px;
   display: inline-block;
 }
 
 .trending-main-sec {
   padding: 5px;
- margin-left: 20px;
- margin-right: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
   background-color: var(--mid);
   border-radius: 7px;
 }
 
 .trending-sec-interact {
-
-
   text-align: right;
-  font-family: Georgia, "Times New Roman", Times, serif;
+  font-family: Georgia, 'Times New Roman', Times, serif;
   font-style: italic;
   justify-content: right;
   float: right;
@@ -298,16 +286,15 @@ button {
 }
 
 .trending-sec-user {
-  float:left;
+  float: left;
   padding: 5px;
   font-weight: bold;
 }
 
 .trending-stat-box {
-padding-top: 10px;
-text-align: center;
+  padding-top: 10px;
+  text-align: center;
 }
-
 
 h1 {
   font-weight: bold;
@@ -317,7 +304,7 @@ h2 {
   text-align: center;
 }
 
-h3{
+h3 {
   font-size: large;
 }
 
