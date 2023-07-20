@@ -1,29 +1,24 @@
 const logoutHandler = async (event) => {
   event.preventDefault();
 
-  const response = await fetch("/api/users/logout", {
-    method: "POST",
-    body: "",
-    headers: { "Content-Type": "application/json" },
+  const response = await fetch('/api/users/logout', {
+    method: 'POST',
+    body: '',
+    headers: { 'Content-Type': 'application/json' },
   });
 
   if (response.ok) {
-    document.location.replace("/");
+    document.location.replace('/');
   } else {
-    alert("Failed to logout");
+    alert('Failed to logout');
   }
 };
 
-const logoutButton = document.querySelector("#logout-button");
-if (logoutButton) {
-  logoutButton.addEventListener("click", logoutHandler);
-}
-
 function onLikePost(postId, element) {
   fetch(`/api/posts/like/${postId}`, {
-    method: "POST",
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
   }).then((response) => {
     if (response.ok) {
@@ -34,54 +29,24 @@ function onLikePost(postId, element) {
       });
       // document.location.reload();
     } else {
-      alert("Failed to like post");
+      alert('Failed to like post');
     }
   });
 }
 
-function onNewPost() {
-  console.log("new post");
-  const postText = document.getElementById("post-text").value.trim();
-
-  if (postText) {
-    fetch("/api/posts", {
-      method: "POST",
-      body: JSON.stringify({
-        post_title: postText,
-        post_content: postText,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }).then((response) => {
-      if (response.ok) {
-        document.location.reload();
-      } else {
-        alert("Failed to create post");
-      }
-    });
-  }
-}
-
-function onSelectTag() {
-  const selectedTag = document.getElementById("tag-select").value;
-  if (selectedTag) {
-    const postTextEl = document.getElementById("post-text");
-    const postText = postTextEl.value.trim();
-    postTextEl.value = `${postText} ${selectedTag} `;
-  }
-}
-
-const newCommentHandler = async (event) => {
+const newPostHandler = async (event) => {
   event.preventDefault();
 
-  const post_id = document.querySelector('post-id').value.trim();
-  const comment_text = document.querySelector('#comment-text').value.trim();
+  const post_content = document.querySelector('#post-text').value.trim();
+  const tag_name = document
+    .querySelector('#tag-select')
+    .value.trim()
+    .replace('#', '');
 
-  if (post_id && comment_text) {
-    const response = await fetch(`/api/comments`, {
+  if (post_content && tag_name) {
+    const response = await fetch(`/api/posts`, {
       method: 'POST',
-      body: JSON.stringify({ post_id, comment_text }),
+      body: JSON.stringify({ post_content, tag_name }),
       headers: {
         'Content-Type': 'application/json',
       },
@@ -90,16 +55,29 @@ const newCommentHandler = async (event) => {
     if (response.ok) {
       document.location.replace('/');
     } else {
-      alert('Failed to create comment');
+      alert('Failed to create post');
     }
+  } else {
+    alert("Your post is either empty or you haven't selected a tag");
   }
 };
 
-const newCommentHandler = async (event) => {
-  event.preventDefault();
+const modal = document.querySelector('.modal');
+const openModal = document.querySelector('.open');
+const closeModal = document.querySelector('.close');
 
-  const post_id = document.querySelector('post-id').value.trim();
-  const comment_text = document.querySelector('#comment-text').value.trim();
+openModal.addEventListener('click', () => {
+  modal.showModal();
+});
+
+closeModal.addEventListener('click', () => {
+  modal.close();
+});
+
+const newCommentHandler = async (postId) => {
+
+  const post_id = `${postId}`;
+  const comment_text = document.querySelector('#cmnt-text').value.trim();
 
   if (post_id && comment_text) {
     const response = await fetch(`/api/comments`, {
@@ -122,4 +100,6 @@ document
   .querySelector('#logout-button')
   .addEventListener('click', logoutHandler);
 
-
+document
+  .querySelector('#post-button')
+  .addEventListener('click', newPostHandler);

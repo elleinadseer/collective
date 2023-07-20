@@ -1,9 +1,9 @@
-const router = require("express").Router();
-const { where } = require("sequelize");
-const { Post, Comment, User } = require("../models");
-const withAuth = require("../utils/auth");
+const router = require('express').Router();
+const { where } = require('sequelize');
+const { Post, Comment, User, Tag } = require('../models');
+const withAuth = require('../utils/auth');
 
-const tags = ["comedy", "general", "help", "discussion"];
+const tags = ['comedy', 'general', 'help', 'discussion'];
 
 router.get('/', async (req, res) => {
   try {
@@ -12,6 +12,15 @@ router.get('/', async (req, res) => {
         {
           model: User,
           attributes: ['user_name'],
+        },
+        {
+          model: Tag,
+          attributes: ['tag_name'],
+        },
+        {
+          model: Comment,
+          attributes: ['comment_id', 'user_id', 'post_id', 'comment_text', 'created_at', 'likes'],
+          include: [User],
         },
       ],
       order: [['created_at', 'DESC']],
@@ -56,13 +65,17 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.get("/user/:id", async (req, res) => {
+router.get('/user/:id', async (req, res) => {
   try {
     const postData = await Post.findAll({
       include: [
         {
           model: User,
-          attributes: ["user_name"],
+          attributes: ['user_name'],
+        },
+        {
+          model: Tag,
+          attributes: ['tag_name'],
         },
       ],
       where: {
@@ -88,7 +101,7 @@ router.get("/user/:id", async (req, res) => {
     const user = await User.findByPk(req.params.id);
     const loggedOnUser = user.get({ plain: true });
 
-    res.render("homepage", {
+    res.render('homepage', {
       posts,
       trendingPosts,
       logged_in: req.session.logged_in,
@@ -100,27 +113,69 @@ router.get("/user/:id", async (req, res) => {
   }
 });
 
-router.get("/user-menu", async (req, res) => {
-  const user = userData.get({ plain: true });
+router.get('/tag/:tag_name', async (req, res) => {
+  try {
+    const postData = await Post.findAll({
+      include: [
+        {
+          model: User,
+          attributes: ['user_name'],
+        },
+        {
+          model: Tag,
+          attributes: ['tag_name'],
+        },
+      ],
+      order: [['created_at', 'DESC']],
+      where: {}, // Empty object for the condition
+    });
 
-  // Pass the data to the Handlebars template
-  res.render("user-menu", {
-    ...user,
-    logged_in: true,
-  });
+    const posts = postData.map((post) => post.get({ plain: true }));
+
+    const trendingData = await Post.findAll({
+      include: [
+        {
+          model: User,
+          attributes: ['user_name'],
+        },
+        {
+          model: Tag,
+          attributes: ['tag_name'],
+          where: { tag_name: req.params.tag_name }, // Filter by the selected tag
+        },
+      ],
+      order: [['likes', 'DESC']],
+    });
+
+    const trendingPosts = trendingData.map((post) => post.get({ plain: true }));
+
+    // Filter posts based on the selected tag
+    const filteredPosts = posts.filter((post) =>
+      post.tags.some((tag) => tag.tag_name === req.params.tag_name)
+    );
+
+    res.render('homepage', {
+      posts: filteredPosts, // Pass the filtered posts to the template
+      logged_in: req.session.logged_in,
+      tags, // Don't forget to pass the tags to the template
+      trendingPosts,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
-router.get("/post/:post_id", async (req, res) => {
+router.get('/post/:post_id', async (req, res) => {
   try {
     const postData = await Post.findByPk(req.params.post_id, {
       include: [
         {
           model: User,
-          attributes: ["user_name"],
+          attributes: ['user_name'],
         },
         {
           model: Comment,
-          attributes: ["comment_text", "created_at", "likes"],
+          attributes: ['comment_text', 'created_at', 'likes'],
         },
       ],
     });
@@ -132,7 +187,7 @@ router.get("/post/:post_id", async (req, res) => {
       logged_in: req.session.logged_in,
     }); */
 
-    res.render("thread", {
+    res.render('thread', {
       ...post,
       logged_in: req.session.logged_in,
     });
@@ -142,17 +197,17 @@ router.get("/post/:post_id", async (req, res) => {
 });
 
 // Use withAuth middleware to prevent access to route
-router.get("/profile", withAuth, async (req, res) => {
+router.get('/profile', withAuth, async (req, res) => {
   try {
     // Find the logged in user based on the session ID
     const userData = await User.findByPk(req.session.user_id, {
-      attributes: { exclude: ["user_password"] },
+      attributes: { exclude: ['user_password'] },
       include: [{ model: Post }, { model: Comment }],
     });
 
     const user = userData.get({ plain: true });
 
-    res.render("profile", {
+    res.render('profile', {
       ...user,
       logged_in: true,
     });
@@ -161,17 +216,17 @@ router.get("/profile", withAuth, async (req, res) => {
   }
 });
 
-router.get("/user/:user_id", async (req, res) => {
+router.get('/user/:user_id', async (req, res) => {
   try {
     const userData = await User.findByPk(req.params.user_id, {
-      attributes: { exclude: ["user_password"] },
+      attributes: { exclude: ['user_password'] },
       include: [{ model: Post }, { model: Comment }],
     });
 
     const user = userData.get({ plain: true });
 
     // Maybe swap this out for a seperate 'user' view?
-    res.render("profile", {
+    res.render('profile', {
       ...user,
       logged_in: req.session.logged_in,
     });
@@ -180,24 +235,24 @@ router.get("/user/:user_id", async (req, res) => {
   }
 });
 
-router.get("/signup", (req, res) => {
+router.get('/signup', (req, res) => {
   // If the user is already logged in, redirect the request to their profile route
   if (req.session.logged_in) {
-    res.redirect("/profile");
+    res.redirect('/profile');
     return;
   }
 
-  res.render("signup");
+  res.render('signup');
 });
 
-router.get("/login", (req, res) => {
+router.get('/login', (req, res) => {
   // If the user is already logged in, redirect the request to their profile route
   if (req.session.logged_in) {
-    res.redirect("/profile");
+    res.redirect('/profile');
     return;
   }
 
-  res.render("login");
+  res.render('login');
 });
 
 module.exports = router;
