@@ -14,24 +14,25 @@
     </section>
 
     {{#if logged_in}}
-    <section class='user-sec'>
-      <div class='user'>
-        <h1><a
-            href='/user/{{loggedOnUser.user_id}}'
-          >@{{loggedOnUser.user_name}}</a></h1>
-        <br />
-        <p>
-          {{loggedOnUser.user_bio}}
-        </p>
-        <br />
-        <p>Joined on {{timeago loggedOnUser.joined_on}}</p>
-      </div>
-    </section>
+      <section class='user-sec'>
+        <div class='user'>
+          <h1><a
+              href='/user/{{loggedOnUser.user_id}}'
+            >@{{loggedOnUser.user_name}}</a></h1>
+          <br />
+          <p>
+            {{loggedOnUser.user_bio}}
+          </p>
+          <br />
+          <p>Joined on {{timeago loggedOnUser.joined_on}}</p>
+        </div>
+      </section>
     {{/if}}
 
   </div>
 
   <div class='center'>
+    <h2>Today's Character Limit is {{getCharLimit}}</h2>
     <section class='cat-sec'>
       {{#each tags}}
         <div class='cat-box' data-tag='{{this}}'>
@@ -42,7 +43,12 @@
 
     {{#if logged_in}}
       <section class='post-sec'>
-        <input type='text' class='post-sec-post' id='post-text' />
+        <input
+          type='text'
+          class='post-sec-post'
+          id='post-text'
+          maxlength={{getCharLimit}}
+        />
         <select
           name='tag-select'
           id='tag-select'
@@ -113,7 +119,12 @@
               {{post.post_content}}
             </p>
 
-            <input type='text' class='cmnt-sec-post' id='cmnt-text' />
+            <input
+              type='text'
+              class='cmnt-sec-post'
+              id='cmnt-text'
+              maxlength={{getCharLimit}}
+            />
             <button
               id='cmnt-button'
               onclick='newCommentHandler({{post.post_id}});'
