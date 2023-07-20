@@ -13,6 +13,10 @@ router.get('/', async (req, res) => {
           model: User,
           attributes: ['user_name'],
         },
+        {
+          model: Comment,
+          attributes: ['comment_id', 'user_id', 'post_id', 'comment_text', 'created_at', 'likes'],
+        },
       ],
       order: [['created_at', 'DESC']],
     });
@@ -30,6 +34,18 @@ router.get('/', async (req, res) => {
     });
 
     const trendingPosts = trendingData.map((post) => post.get({ plain: true }));
+
+    const commentData = await Comment.findAll({
+      include: [
+        {
+          model: User,
+          attributes: ['user_name'],
+        },
+      ],
+      order: [['created_at', 'DESC']],
+    });
+
+    const comments = commentData.map((comment) => comment.get({ plain: true }));
 
     if (req.session.logged_in) {
       const user = await User.findByPk(req.session.user_id);

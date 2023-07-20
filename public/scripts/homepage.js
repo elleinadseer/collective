@@ -19,6 +19,28 @@ if (logoutButton) {
   logoutButton.addEventListener("click", logoutHandler);
 }
 
+const newCommentHandler = async (postId) => {
+
+  const post_id = `${postId}`;
+  const comment_text = document.querySelector('#cmnt-text').value.trim();
+
+  if (post_id && comment_text) {
+    const response = await fetch(`/api/comments`, {
+      method: 'POST',
+      body: JSON.stringify({ post_id, comment_text }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (response.ok) {
+      document.location.replace('/');
+    } else {
+      alert('Failed to create comment');
+    }
+  }
+};
+
 function onLikePost(postId, element) {
   fetch(`/api/posts/like/${postId}`, {
     method: "POST",
@@ -35,6 +57,26 @@ function onLikePost(postId, element) {
       // document.location.reload();
     } else {
       alert("Failed to like post");
+    }
+  });
+}
+
+function onLikeComment(commentId, element) {
+  fetch(`/api/comments/like/${commentId}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  }).then((response) => {
+    if (response.ok) {
+      response.json().then((data) => {
+        document.getElementById(`likes-${commentId}`).innerHTML = data.likes;
+
+        element.onclick = null;
+      });
+      // document.location.reload();
+    } else {
+      alert("Failed to like comment");
     }
   });
 }
@@ -72,46 +114,26 @@ function onSelectTag() {
   }
 }
 
+const modal = document.querySelector('.modal');
+const openModal = document.querySelector('.open');
+const closeModal = document.querySelector('.close');
 
-  // Comment drop down section
+openModal.addEventListener('click', () => {
+  modal.showModal();
+});
 
-  document.addEventListener("DOMContentLoaded", function() {
-    var commentBtn = document.getElementById("comment-btn");
-    var commentsDrop = document.getElementById("comments-drop");
+closeModal.addEventListener('click', () => {
+  modal.close();
+});
 
-    commentBtn.addEventListener("click", function() {
-      if (commentsDrop.style.display === "block") {
-        commentsDrop.style.display = "none";
-      } else {
-        commentsDrop.style.display = "block";
-      }
-    });
-  });
 
-const newCommentHandler = async (event) => {
-  event.preventDefault();
+  /*/ Comment drop down section
+  const commentBtn = document.getElementById("comment-btn");
+  const commentsDrop = document.getElementById("comments-drop");
 
-  const post_id = document.querySelector('post-id').value.trim();
-  const comment_text = document.querySelector('#comment-text').value.trim();
-
-  if (post_id && comment_text) {
-    const response = await fetch(`/api/comments`, {
-      method: 'POST',
-      body: JSON.stringify({ post_id, comment_text }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-
-    if (response.ok) {
-      document.location.replace('/');
-    } else {
-      alert('Failed to create comment');
-    }
-  }
-};
-
-document
-  .querySelector('#logout-button')
-  .addEventListener('click', logoutHandler);
-
+  commentBtn.addEventListener("click", function() {
+  if (commentsDrop.style.display === "block") {
+    commentsDrop.style.display = "none";
+  } else {
+    commentsDrop.style.display = "block";
+  } } ) */
