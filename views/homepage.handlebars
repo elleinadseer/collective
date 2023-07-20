@@ -112,12 +112,14 @@
             <p class='main-sec-post'>
               {{post.post_content}}
             </p>
-
+           
+            {{#if logged_in}}
             <input type='text' class='cmnt-sec-post' id='cmnt-text' />
             <button
               id='cmnt-button'
               onclick='newCommentHandler({{post.post_id}});'
             >Comment</button>
+            {{/if}}
           </div>
 
           <div class='comments'>

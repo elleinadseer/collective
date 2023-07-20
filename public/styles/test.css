@@ -197,6 +197,7 @@ button {
   display: inline-block;
   color: white;
   border-color: var(--border);
+  padding-left: 10px;
 }
 
 .post-sec-cat {
