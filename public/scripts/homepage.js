@@ -62,26 +62,22 @@ const newPostHandler = async (event) => {
   }
 };
 
-// Comment drop down section
+const modal = document.querySelector('.modal');
+const openModal = document.querySelector('.open');
+const closeModal = document.querySelector('.close');
 
-document.addEventListener('DOMContentLoaded', function () {
-  var commentBtn = document.getElementById('comment-btn');
-  var commentsDrop = document.getElementById('comments-drop');
-
-  commentBtn.addEventListener('click', function () {
-    if (commentsDrop.style.display === 'block') {
-      commentsDrop.style.display = 'none';
-    } else {
-      commentsDrop.style.display = 'block';
-    }
-  });
+openModal.addEventListener('click', () => {
+  modal.showModal();
 });
 
-const newCommentHandler = async (event) => {
-  event.preventDefault();
+closeModal.addEventListener('click', () => {
+  modal.close();
+});
 
-  const post_id = document.querySelector('post-id').value.trim();
-  const comment_text = document.querySelector('#comment-text').value.trim();
+const newCommentHandler = async (postId) => {
+
+  const post_id = `${postId}`;
+  const comment_text = document.querySelector('#cmnt-text').value.trim();
 
   if (post_id && comment_text) {
     const response = await fetch(`/api/comments`, {
