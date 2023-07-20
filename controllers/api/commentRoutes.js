@@ -14,6 +14,19 @@ router.post('/', withAuth, async (req, res) => {
   }
 });
 
+router.post('/like/:comment_id', async (req, res) => {
+  try {
+    const commentData = await Comment.findByPk(req.params.comment_id);
+    commentData.likes++;
+
+    commentData.save();
+
+    res.status(200).json(commentData);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
+
 router.get('/:comment_id', async (req, res) => {
   try {
     const commentData = await Comment.findByPk(req.params.comment_id);
