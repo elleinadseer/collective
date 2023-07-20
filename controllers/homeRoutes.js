@@ -127,6 +127,23 @@ router.get('/tag/:tag_name', async (req, res) => {
 
     const posts = postData.map((post) => post.get({ plain: true }));
 
+    const trendingData = await Post.findAll({
+      include: [
+        {
+          model: User,
+          attributes: ['user_name'],
+        },
+        {
+          model: Tag,
+          attributes: ['tag_name'],
+          where: { tag_name: req.params.tag_name }, // Filter by the selected tag
+        },
+      ],
+      order: [['likes', 'DESC']],
+    });
+
+    const trendingPosts = trendingData.map((post) => post.get({ plain: true }));
+
     // Filter posts based on the selected tag
     const filteredPosts = posts.filter((post) =>
       post.tags.some((tag) => tag.tag_name === req.params.tag_name)
@@ -136,6 +153,7 @@ router.get('/tag/:tag_name', async (req, res) => {
       posts: filteredPosts, // Pass the filtered posts to the template
       logged_in: req.session.logged_in,
       tags, // Don't forget to pass the tags to the template
+      trendingPosts,
     });
   } catch (err) {
     res.status(500).json(err);
