@@ -63,21 +63,28 @@ const newPostHandler = async (event) => {
 };
 
 const modal = document.querySelector('.modal');
-const openModal = document.querySelector('.open');
-const closeModal = document.querySelector('.close');
+const openModals = document.querySelectorAll('.open');
+const closeModals = document.querySelectorAll('.close');
 
-openModal.addEventListener('click', () => {
-  modal.showModal();
+openModals.forEach((openModal, index) => {
+  openModal.addEventListener('click', () => {
+    const modal = document.querySelectorAll('.modal')[index];
+    modal.showModal();
+  });
 });
 
-closeModal.addEventListener('click', () => {
-  modal.close();
+closeModals.forEach((closeModal, index) => {
+  closeModal.addEventListener('click', () => {
+    const modal = document.querySelectorAll('.modal')[index];
+    modal.close();
+  });
 });
 
 const newCommentHandler = async (postId) => {
-
   const post_id = `${postId}`;
-  const comment_text = document.querySelector('#cmnt-text').value.trim();
+  const comment_text = document
+    .querySelector(`#cmnt-text-${postId}`)
+    .value.trim();
 
   if (post_id && comment_text) {
     const response = await fetch(`/api/comments`, {

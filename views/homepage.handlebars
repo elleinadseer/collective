@@ -24,7 +24,7 @@
             {{loggedOnUser.user_bio}}
           </p>
           <br />
-          <p>Joined on {{timeago loggedOnUser.joined_on}}</p>
+          <p>Joined on {{format_date loggedOnUser.joined_on}}</p>
         </div>
       </section>
     {{/if}}
@@ -122,7 +122,7 @@
             <input
               type='text'
               class='cmnt-sec-post'
-              id='cmnt-text'
+              id='cmnt-text-{{post.post_id}}'
               maxlength={{getCharLimit}}
             />
             <button
