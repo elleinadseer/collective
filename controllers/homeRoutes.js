@@ -165,7 +165,6 @@ router.get('/tag/:tag_name', async (req, res) => {
   }
 });
 
-/*
 router.get('/post/:post_id', async (req, res) => {
   try {
     const postData = await Post.findByPk(req.params.post_id, {
@@ -186,8 +185,7 @@ router.get('/post/:post_id', async (req, res) => {
     /*     res.status(200).json({
       ...post,
       logged_in: req.session.logged_in,
-    }); */ 
-    /*
+    }); */
 
     res.render('thread', {
       ...post,
@@ -196,8 +194,7 @@ router.get('/post/:post_id', async (req, res) => {
   } catch (err) {
     res.status(500).json(err);
   }
-}); 
-*/
+});
 
 // Use withAuth middleware to prevent access to route
 router.get('/profile', withAuth, async (req, res) => {
