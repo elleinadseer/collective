@@ -20,10 +20,6 @@ Post.init(
         key: 'user_id',
       },
     },
-    post_title: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
     post_content: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -36,10 +32,6 @@ Post.init(
       type: DataTypes.INTEGER,
       defaultValue: 0,
     },
-    /* tag_id: {
-      type: DataTypes.INTEGER,
-    },
-    /* Allow user to choose tag from front end then convert to a tag_id */
   },
   {
     sequelize,

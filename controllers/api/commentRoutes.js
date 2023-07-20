@@ -71,7 +71,7 @@ router.delete('/:comment_id', withAuth, async (req, res) => {
 
     !commentData
       ? res.status(404).json({ message: 'No comment found with this id!' })
-      : res.status(200).json(postData);
+      : res.status(200).json(commentData);
   } catch (err) {
     res.status(500).json(err);
   }
