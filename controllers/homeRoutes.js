@@ -17,6 +17,11 @@ router.get('/', async (req, res) => {
           model: Tag,
           attributes: ['tag_name'],
         },
+        {
+          model: Comment,
+          attributes: ['comment_id', 'user_id', 'post_id', 'comment_text', 'created_at', 'likes'],
+          include: [User],
+        },
       ],
       order: [['created_at', 'DESC']],
     });
