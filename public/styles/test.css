@@ -17,6 +17,12 @@
   font-weight: 100;
   font-kerning: auto;
   color: white;
+  text-decoration: none;
+  word-break: break-word;
+}
+
+a{
+  font-weight: bold;
 }
 
 body {
@@ -50,6 +56,10 @@ header {
   justify-content: center;
   padding: 10px;
   margin-top: 10px;
+}
+
+.char-limit {
+  padding-bottom: 20px;
 }
 
 .header-section {
@@ -111,11 +121,24 @@ button {
   width: 22%;
 }
 
+.cat-box:hover{
+background-color: var(--light);
+}
+
+button:hover{
+  background-color: var(--light);
+}
+
+#cmnt-button:hover{
+  background-color: var(--mid);
+}
+
 .main-sec {
   padding: 20px;
   margin: 10px;
   background-color: var(--mid);
   border-radius: 7px;
+  
 
 }
 
@@ -208,22 +231,57 @@ button {
 }
 
 .main-sec-user {
-  
   padding: 5px;
   font-weight: bold;
 }
 
+.comment-sec-user {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.comment-sec-interact {
+text-align: right;
+}
+
+.main-sec-stats {
+  margin-right: 5px;
+  margin-top: 20px;
+  text-align: right;
+}
+
+.comment-stat-box {
+
+  width: 6%;
+  padding-left: 0px;
+  padding-right: 5px;
+  padding-top: 5px;
+  display: inline-grid;
+
+}
+
+.comment-stat-number {
+padding-left: 8px;
+}
+
+.comment-trend-img {
+  margin-bottom: 5px;
+  padding-top: 5px;
+justify-content: space-around;
+padding-left: 2px;
+}
+
 .main-sec-post {
- 
+
   /* padding: 5px; */
   width: 100%;
   display: inline-block;
   padding-left: 5px;
+  padding-right: 5px
 }
 
 .main-sec-interact {
-  
-  padding: 5px;
   text-align: right;
   font-family: Georgia, "Times New Roman", Times, serif;
   font-style: italic;
@@ -240,13 +298,17 @@ button {
   text-align: left;
 }
 
+.trending-sec-stats {
+text-align: center;
+}
+
 
 
 .stat-box {
   /* pre grid display */
   /* display: inline-block; */
   width: 6%;
-  padding-left: 0px;
+  padding-left: 5px;
   padding-right: 5px;
   padding-top: 5px;
   display: inline-grid;
@@ -255,13 +317,14 @@ button {
 
 .stat-img {
   margin-bottom: 5px;
-  margin-left: 8px;
+  margin-left: 20%;
 justify-content: space-around;
+
 }
 
 .trend-img {
   margin-bottom: 5px;
-
+  padding-top: 5px;
 justify-content: space-around;
 }
 
@@ -269,6 +332,10 @@ justify-content: space-around;
   margin-bottom: 5px;
   margin-left: 13px;
 justify-content: space-around;
+}
+
+.plus-txt {
+ padding-top: 3px;
 }
 
 #comments-drop {
@@ -314,7 +381,7 @@ button {
 }
 
 .trending-sec-post {
- background-color: var(--light);
+ background-color: var(--dark);
  border-radius: 7px;
   padding: 10px;
   display: inline-block;
@@ -324,13 +391,20 @@ button {
   padding: 5px;
  margin-left: 20px;
  margin-right: 20px;
-  background-color: var(--mid);
+
   border-radius: 7px;
 }
 
 .trending-sec-interact {
+  text-align: right;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-style: italic;
+  justify-content: right;
+  float: right;
+  padding: 5px;
+}
 
-
+.comment-sec-interact {
   text-align: right;
   font-family: Georgia, "Times New Roman", Times, serif;
   font-style: italic;
@@ -405,5 +479,11 @@ footer {
   header {
     display: flex;
     flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 827px) {
+  .char-limit {
+    margin-top: -10px;
   }
 }
