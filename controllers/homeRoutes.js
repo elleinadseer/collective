@@ -19,7 +19,14 @@ router.get('/', async (req, res) => {
         },
         {
           model: Comment,
-          attributes: ['comment_id', 'user_id', 'post_id', 'comment_text', 'created_at', 'likes'],
+          attributes: [
+            'comment_id',
+            'user_id',
+            'post_id',
+            'comment_text',
+            'created_at',
+            'likes',
+          ],
           include: [User],
         },
       ],
@@ -77,6 +84,18 @@ router.get('/user/:id', async (req, res) => {
           model: Tag,
           attributes: ['tag_name'],
         },
+        {
+          model: Comment,
+          attributes: [
+            'comment_id',
+            'user_id',
+            'post_id',
+            'comment_text',
+            'created_at',
+            'likes',
+          ],
+          include: [User],
+        },
       ],
       where: {
         user_id: req.params.id,
@@ -125,6 +144,18 @@ router.get('/tag/:tag_name', async (req, res) => {
           model: Tag,
           attributes: ['tag_name'],
         },
+        {
+          model: Comment,
+          attributes: [
+            'comment_id',
+            'user_id',
+            'post_id',
+            'comment_text',
+            'created_at',
+            'likes',
+          ],
+          include: [User],
+        },
       ],
       order: [['created_at', 'DESC']],
       where: {}, // Empty object for the condition
@@ -154,12 +185,25 @@ router.get('/tag/:tag_name', async (req, res) => {
       post.tags.some((tag) => tag.tag_name === req.params.tag_name)
     );
 
-    res.render('homepage', {
-      posts: filteredPosts, // Pass the filtered posts to the template
-      logged_in: req.session.logged_in,
-      tags, // Don't forget to pass the tags to the template
-      trendingPosts,
-    });
+    if (req.session.logged_in) {
+      const user = await User.findByPk(req.session.user_id);
+      const loggedOnUser = user.get({ plain: true });
+
+      res.render('homepage', {
+        posts: filteredPosts,
+        logged_in: req.session.logged_in,
+        loggedOnUser,
+        tags,
+        trendingPosts,
+      });
+    } else {
+      res.render('homepage', {
+        posts: filteredPosts,
+        logged_in: req.session.logged_in,
+        tags,
+        trendingPosts,
+      });
+    }
   } catch (err) {
     res.status(500).json(err);
   }
