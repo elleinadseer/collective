@@ -23,6 +23,18 @@ router.get('/', async (req, res) => {
 
     const posts = postData.map((post) => post.get({ plain: true }));
 
+    const trendingData = await Post.findAll({
+      include: [
+        {
+          model: User,
+          attributes: ['user_name'],
+        },
+      ],
+      order: [['likes', 'DESC']],
+    });
+
+    const trendingPosts = trendingData.map((post) => post.get({ plain: true }));
+
     if (req.session.logged_in) {
       const user = await User.findByPk(req.session.user_id);
       //const user = await User.findByPk(1);
@@ -30,6 +42,7 @@ router.get('/', async (req, res) => {
 
       res.render('homepage', {
         posts,
+        trendingPosts,
         logged_in: req.session.logged_in,
         loggedOnUser,
         tags,
@@ -37,6 +50,7 @@ router.get('/', async (req, res) => {
     } else {
       res.render('homepage', {
         posts,
+        trendingPosts,
         logged_in: req.session.logged_in,
         tags,
       });
@@ -66,12 +80,25 @@ router.get('/user/:id', async (req, res) => {
 
     const posts = postData.map((post) => post.get({ plain: true }));
 
+    const trendingData = await Post.findAll({
+      include: [
+        {
+          model: User,
+          attributes: ['user_name'],
+        },
+      ],
+      order: [['likes', 'DESC']],
+    });
+
+    const trendingPosts = trendingData.map((post) => post.get({ plain: true }));
+
     //const user = await User.findByPk(req.session.user_id);
     const user = await User.findByPk(req.params.id);
     const loggedOnUser = user.get({ plain: true });
 
     res.render('homepage', {
       posts,
+      trendingPosts,
       logged_in: req.session.logged_in,
       loggedOnUser,
       tags,
