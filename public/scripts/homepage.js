@@ -34,6 +34,26 @@ function onLikePost(postId, element) {
   });
 }
 
+function onLikeComment(commentId, element) {
+  fetch(`/api/comments/like/${commentId}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  }).then((response) => {
+    if (response.ok) {
+      response.json().then((data) => {
+        document.getElementById(`likes-${commentId}`).innerHTML = data.likes;
+
+        element.onclick = null;
+      });
+      // document.location.reload();
+    } else {
+      alert('Failed to like comment');
+    }
+  });
+}
+
 const newPostHandler = async (event) => {
   event.preventDefault();
 
