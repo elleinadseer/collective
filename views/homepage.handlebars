@@ -14,24 +14,27 @@
     </section>
 
     {{#if logged_in}}
-    <section class='user-sec'>
-      <div class='user'>
-        <h1><a
-            href='/user/{{loggedOnUser.user_id}}'
-          >@{{loggedOnUser.user_name}}</a></h1>
-        <br />
-        <p>
-          {{loggedOnUser.user_bio}}
-        </p>
-        <br />
-        <p>Joined on {{timeago loggedOnUser.joined_on}}</p>
-      </div>
-    </section>
+      <section class='user-sec'>
+        <div class='user'>
+          <h1><a
+              href='/user/{{loggedOnUser.user_id}}'
+            >@{{loggedOnUser.user_name}}</a></h1>
+          <br />
+          <p>
+            {{loggedOnUser.user_bio}}
+          </p>
+          <br />
+          <p>Joined on {{format_date loggedOnUser.joined_on}}</p>
+        </div>
+      </section>
     {{/if}}
 
   </div>
 
   <div class='center'>
+    <div class="char-limit">
+    <h2>Today's Character Limit: {{getCharLimit}}</h2>
+    </div>
     <section class='cat-sec'>
       {{#each tags}}
         <div class='cat-box' data-tag='{{this}}'>
@@ -42,7 +45,12 @@
 
     {{#if logged_in}}
       <section class='post-sec'>
-        <input type='text' class='post-sec-post' id='post-text' />
+        <input
+          type='text'
+          class='post-sec-post'
+          id='post-text'
+          maxlength={{getCharLimit}}
+        />
         <select
           name='tag-select'
           id='tag-select'
@@ -67,7 +75,7 @@
           >@{{post.user.user_name}}</a>
           {{#each post.tags as |tag|}}
             <!-- Loop through the tags associated with the post -->
-            <span class='post-tag'><a
+            <span class='post-tag'>- <a
                 href='/tag/{{tag.tag_name}}'
                 data-tag='{{tag.tag_name}}'
               >#{{tag.tag_name}}</a></span>
@@ -80,18 +88,18 @@
 
         <div class='main-sec-stats'>
           <div class='stat-box' onclick='onLikePost({{post.post_id}}, this);'>
-            <img class='stat-img' width='20px' src='/images/heart.png' />
+            <img class='stat-img' width='20px' src='/images/heart.png'/>
             <p id='likes-{{post.post_id}}'><span>{{post.likes}}</span></p>
           </div>
 
           <div class='stat-box'>
             <div class='open'>
-              <img
+              <img 
                 id='comment-btn-{{post.post_id}}'
                 width='20px'
                 src='/images/comment.png'
               />
-              <p class='stat-img'>more</p>
+              <p class="plus-txt">+</p>
             </div>
           </div>
 
@@ -112,11 +120,19 @@
             <p class='main-sec-post'>
               {{post.post_content}}
             </p>
+<<<<<<< HEAD
             
             <input
               type='text'
               class='cmnt-sec-post'
               id='cmnt-text'
+=======
+
+            <input
+              type='text'
+              class='cmnt-sec-post'
+              id='cmnt-text-{{post.post_id}}'
+>>>>>>> cf4588213cf02225343749a9fdf4133c1879a419
               maxlength={{getCharLimit}}
             />
             <button
@@ -139,17 +155,17 @@
                   {{comment.comment_text}}
                 </p>
 
-                <div class='main-sec-stats'>
+                <div class='comment-sec-stats'>
                   <div
                     class='comment-stat-box'
-                    onclick='onLikePost({{comment.comment_id}});'
+                    onclick='onLikeComment({{comment.comment_id}}, this);'
                   >
                     <img
-                      class='trend-img'
+                      class='comment-trend-img'
                       width='20px'
                       src='/images/heart.png'
                     />
-                    <p id='likes-{{comment.comment_id}}'>{{comment.likes}}</p>
+                    <p class="comment-stat-number" id='likes-{{comment.comment_id}}'>{{comment.likes}}</p>
                   </div>
                 </div>
               </section>
@@ -173,12 +189,13 @@
           <p class='trending-sec-user'><a
               href='/user/{{trendingPost.user_id}}'
             >@{{trendingPost.user.user_name}}</a></p>
-
+            <br>
+            <br>
           <p class='trending-sec-post'>
             {{trendingPost.post_content}}
           </p>
 
-          <div class='main-sec-stats'>
+          <div class='trending-sec-stats'>
             <div
               class='trending-stat-box'
               onclick='onLikePost({{trendingPost.post_id}});'
@@ -195,4 +212,4 @@
 
 </section>
 
-<script src='./scripts/homepage.js'></script>
+<script src='/scripts/homepage.js'></script>
