@@ -43,6 +43,7 @@ router.get('/', async (req, res) => {
         },
       ],
       order: [['likes', 'DESC']],
+      limit: 4
     });
 
     const trendingPosts = trendingData.map((post) => post.get({ plain: true }));
@@ -112,6 +113,7 @@ router.get('/user/:id', async (req, res) => {
         },
       ],
       order: [['likes', 'DESC']],
+      limit: 4
     });
 
     const trendingPosts = trendingData.map((post) => post.get({ plain: true }));
@@ -176,6 +178,7 @@ router.get('/tag/:tag_name', async (req, res) => {
         },
       ],
       order: [['likes', 'DESC']],
+      limit: 4
     });
 
     const trendingPosts = trendingData.map((post) => post.get({ plain: true }));
