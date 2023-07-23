@@ -7,8 +7,8 @@
           <button id='logout-button'>Log Out</button>
         {{else}}
           <!-- User is not logged in, show Log In and Sign Up buttons -->
-          <button><a href='/login'>Log In</a></button>
-          <button><a href='/signup'>Sign Up</a></button>
+          <button class="log-in-btn"><a href='/login'>Log In</a></button>
+          <button class="log-in-btn"><a href='/signup'>Sign Up</a></button>
         {{/if}}
       </div>
     </section>
@@ -16,19 +16,36 @@
     {{#if logged_in}}
       <section class='user-sec'>
         <div class='user'>
+          <img class="profile-pic-main" src="https://i.pravatar.cc/50?u={{loggedOnUser.user_id}}">
+          <br/>
+          <br/> 
           <h1><a
               href='/user/{{loggedOnUser.user_id}}'
             >@{{loggedOnUser.user_name}}</a></h1>
           <br />
+          
           <p>
             {{loggedOnUser.user_bio}}
           </p>
           <br />
           <p>Joined on {{format_date loggedOnUser.joined_on}}</p>
         </div>
+
+
       </section>
     {{/if}}
+<div class="user-sec">
+  <br/>
+  <h class="user-sec-sitebiohead">What is tl;dr?</h>
+  <p class="user-sec-sitebio">We set out to create tech forum for the modern era. Combining elements of feed-based social medias with tried and tested technology forums, tl;dr is your first destination for tech related, questions, jokes general discussion and more.
+<br/>
+<br/>
+The main feed utilises forum board-adjacent tags as a filter for a single content stream, promoting creativity through a melting pot of content, with each post limited to a character limit that randomises on each day.
 
+
+  </b>
+</div>
+        <div class="user"> <button onclick="lightFunction()" class="light-button">Toggle light mode</button></div>
   </div>
 
   <div class='center'>
@@ -50,6 +67,7 @@
           class='post-sec-post'
           id='post-text'
           maxlength={{getCharLimit}}
+
         />
         <select
           name='tag-select'
@@ -70,6 +88,7 @@
       <section class='main-sec'>
         <p class='main-sec-interact'>{{format_date post.created_at}}</p>
         <!-- <button class="likeButton">Like</button> -->
+        <a href='/user/{{post.user_id}}'><img class="profile-pic" src="https://i.pravatar.cc/50?u={{post.user_id}}"></a> 
         <p class='main-sec-user'><a
             href='/user/{{post.user_id}}'
           >@{{post.user.user_name}}</a>
@@ -111,6 +130,7 @@
           </div>
 
           <div class='cmnt-sec'>
+            <a href='/user/{{post.user_id}}'><img class="profile-pic-modal" src="https://i.pravatar.cc/50?u={{post.user_id}}"></a> 
             <p class='main-sec-interact'>{{format_date post.created_at}}</p>
             <!-- <button class="likeButton">Like</button> -->
             <p class='main-sec-user'><a
