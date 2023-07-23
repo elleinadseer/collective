@@ -21,7 +21,7 @@
   word-break: break-word;
 }
 
-a{
+a {
   font-weight: bold;
 }
 
@@ -34,7 +34,7 @@ body {
 }
 
 .left {
-  flex: 20%;
+  flex: 25%;
 }
 
 .center {
@@ -43,7 +43,18 @@ body {
 }
 
 .right {
-  flex: 20%;
+  flex: 25%;
+}
+
+.light-mode {
+  --dark: #4c4f6a;
+  --mid: rgb(52, 54, 75);
+  --light: rgb(39, 41, 64);
+}
+
+.light-button{
+text-align: center;
+margin-top: -25px;
 }
 
 /* .header-flex {
@@ -80,11 +91,12 @@ button {
 
 .modal {
   margin: auto;
-    background-color: var(--dark);
-    border-radius: 7px;
-    border-color: lavender;
-    width: 45%;
-    padding: 5px;
+  background-color: var(--dark);
+  border-radius: 7px;
+  border-color: lavender;
+  width: 43%;
+  padding: 5px;
+  padding-top: 20px;
 }
 
 .close i {
@@ -121,16 +133,28 @@ button {
   width: 22%;
 }
 
-.cat-box:hover{
-background-color: var(--light);
-}
-
-button:hover{
+.cat-box:hover {
   background-color: var(--light);
 }
 
-#cmnt-button:hover{
-  background-color: var(--mid);
+button:hover {
+  background-color: var(--light);
+}
+
+#logout-button:hover{
+  background-color: var(--light);
+}
+
+#cmnt-button:hover {
+  background-color: var(--dark);
+}
+
+#post-button:hover {
+  background-color: var(--dark);
+}
+
+#post-button {
+margin-top: 10px;
 }
 
 .main-sec {
@@ -138,8 +162,24 @@ button:hover{
   margin: 10px;
   background-color: var(--mid);
   border-radius: 7px;
-  
+}
 
+.profile-pic {
+  float: left;
+  margin: 5px;
+  margin-bottom: 20px;
+  border-radius: 30px;
+}
+
+.profile-pic-modal {
+  float: left;
+  margin: 5px;
+  margin-bottom: 20px;
+  border-radius: 30px;
+}
+
+.profile-pic-main {
+border-radius: 30px;
 }
 
 .post-sec {
@@ -161,13 +201,13 @@ button:hover{
 
 .cmnt-sec-post {
   border-radius: 4px;
-    color: white;
-    height: 33;
-    background-color: var(--dark);
-    padding-left: 10px;
-    border-color: var(--border);
-    width: 70%;
-    margin-top: 30px;
+  color: white;
+  height: 33;
+  background-color: var(--dark);
+  padding-left: 10px;
+  border-color: var(--border);
+  width: 70%;
+  margin-top: 30px;
 }
 
 .cmnt-main-sec {
@@ -185,7 +225,6 @@ button:hover{
 }
 
 .main-profile-sec {
-  
   padding: 15px;
   margin: 10px;
   background-color: var(--light);
@@ -194,7 +233,6 @@ button:hover{
 }
 
 .profile-thread-sec {
- 
   padding: 15px;
   padding-bottom: 15px;
   margin: 30px;
@@ -231,8 +269,10 @@ button:hover{
 }
 
 .main-sec-user {
-  padding: 5px;
+
   font-weight: bold;
+padding-top: 22px;
+padding-left: 70px;
 }
 
 .comment-sec-user {
@@ -242,7 +282,7 @@ button:hover{
 }
 
 .comment-sec-interact {
-text-align: right;
+  text-align: right;
 }
 
 .main-sec-stats {
@@ -252,33 +292,30 @@ text-align: right;
 }
 
 .comment-stat-box {
-
   width: 6%;
-  padding-left: 0px;
+  padding-left: 2px;
   padding-right: 5px;
   padding-top: 5px;
   display: inline-grid;
-
 }
 
 .comment-stat-number {
-padding-left: 8px;
+  padding-left: 8px;
 }
 
 .comment-trend-img {
   margin-bottom: 5px;
   padding-top: 5px;
-justify-content: space-around;
-padding-left: 2px;
+  justify-content: space-around;
+  padding-left: 2px;
 }
 
 .main-sec-post {
-
   /* padding: 5px; */
   width: 100%;
   display: inline-block;
   padding-left: 5px;
-  padding-right: 5px
+  padding-right: 5px;
 }
 
 .main-sec-interact {
@@ -290,8 +327,6 @@ padding-left: 2px;
   padding: 10px;
 }
 
-
-
 .main-sec-stats {
   margin-left: 5px;
   margin-top: 20px;
@@ -299,43 +334,38 @@ padding-left: 2px;
 }
 
 .trending-sec-stats {
-text-align: center;
+  text-align: center;
 }
 
-
-
 .stat-box {
-  /* pre grid display */
-  /* display: inline-block; */
-  width: 6%;
-  padding-left: 5px;
+  margin-left: 5px;
   padding-right: 5px;
   padding-top: 5px;
   display: inline-grid;
   text-align: center;
+  padding: 10px;
 }
 
 .stat-img {
   margin-bottom: 5px;
-  margin-left: 20%;
-justify-content: space-around;
 
+  justify-content: space-around;
 }
 
 .trend-img {
   margin-bottom: 5px;
   padding-top: 5px;
-justify-content: space-around;
+  justify-content: space-around;
 }
 
 .cmt-img {
   margin-bottom: 5px;
   margin-left: 13px;
-justify-content: space-around;
+  justify-content: space-around;
 }
 
 .plus-txt {
- padding-top: 3px;
+  padding-top: 3px;
 }
 
 #comments-drop {
@@ -343,6 +373,14 @@ justify-content: space-around;
 }
 
 button {
+  background-color: var(--mid);
+}
+
+#logout-button{
+    background-color: var(--dark);
+}
+
+.log-in-btn{
   background-color: var(--dark);
 }
 
@@ -354,9 +392,16 @@ button {
   background-color: var(--mid);
   /* border: solid 1px var(--light);
   border-radius: 10px; */
-  justify-content: center;
-  text-align: left;
+
+  text-align: center;
   border-radius: 7px;
+}
+.user-sec-sitebio{
+  padding: 20px;
+}
+
+.user-sec-sitebiohead{
+font-weight: bold;
 }
 
 .user {
@@ -381,16 +426,16 @@ button {
 }
 
 .trending-sec-post {
- background-color: var(--dark);
- border-radius: 7px;
+  background-color: var(--dark);
+  border-radius: 7px;
   padding: 10px;
   display: inline-block;
 }
 
 .trending-main-sec {
   padding: 5px;
- margin-left: 20px;
- margin-right: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
 
   border-radius: 7px;
 }
@@ -413,17 +458,21 @@ button {
   padding: 5px;
 }
 
+.comment-sec-post {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
 .trending-sec-user {
-  float:left;
+  float: left;
   padding: 5px;
   font-weight: bold;
 }
 
 .trending-stat-box {
-padding-top: 10px;
-text-align: center;
+  padding-top: 10px;
+  text-align: center;
 }
-
 
 h1 {
   font-weight: bold;
@@ -433,7 +482,7 @@ h2 {
   text-align: center;
 }
 
-h3{
+h3 {
   font-size: large;
 }
 
@@ -479,6 +528,11 @@ footer {
   header {
     display: flex;
     flex-direction: column;
+  }
+}
+@media screen and (max-width: 827px) {
+  .modal {
+    width: 90%;
   }
 }
 

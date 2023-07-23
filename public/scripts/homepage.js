@@ -123,6 +123,11 @@ const newCommentHandler = async (postId) => {
   }
 };
 
+function lightFunction() {
+  var element = document.body;
+  element.classList.toggle("light-mode");
+}
+
 document
   .querySelector('#logout-button')
   .addEventListener('click', logoutHandler);
