@@ -117,28 +117,28 @@ const postData = [
     user_id: 3,
     post_content:
       "What are some effective ways to prevent common security vulnerabilities in web applications?",
-    created_at: "2023-08-02 12:10:14",
+    created_at: "2023-07-02 12:10:14",
     likes: 11,
   },
   {
     user_id: 2,
     post_content:
       "I want to start contributing to open-source projects. Any advice on finding beginner-friendly projects?",
-    created_at: "2023-08-03 14:55:29",
+    created_at: "2023-07-03 14:55:29",
     likes: 5,
   },
   {
     user_id: 4,
     post_content:
       "How can I set up a continuous integration and continuous deployment (CI/CD) pipeline for my project?",
-    created_at: "2023-08-04 10:33:07",
+    created_at: "2023-07-04 10:33:07",
     likes: 8,
   },
   {
     user_id: 5,
     post_content:
       "I am curious about the latest trends in front-end web development. What technologies should I keep an eye on?",
-    created_at: "2023-08-06 09:22:44",
+    created_at: "2023-07-06 09:22:44",
     likes: 7,
   },
 ];
