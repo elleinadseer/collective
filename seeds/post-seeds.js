@@ -82,63 +82,63 @@ const postData = [
     user_id: 2,
     post_content:
       "I want to implement authentication in my Node.js app. Any recommendations for secure authentication libraries?",
-    created_at: "2023-07-24 09:15:22",
+    created_at: "2023-06-24 09:15:22",
     likes: 8,
   },
   {
     user_id: 3,
     post_content:
       "How can I deploy a machine learning model built with TensorFlow to a web server for real-time predictions?",
-    created_at: "2023-07-25 17:40:11",
+    created_at: "2023-06-25 17:40:11",
     likes: 5,
   },
   {
     user_id: 2,
     post_content:
       "What are some best practices for securing a MongoDB database in a production environment?",
-    created_at: "2023-07-28 14:02:19",
+    created_at: "2023-06-28 14:02:19",
     likes: 7,
   },
   {
     user_id: 1,
     post_content:
       "I am interested in learning about serverless computing. Which cloud platforms offer serverless services?",
-    created_at: "2023-07-29 09:30:56",
+    created_at: "2023-06-29 09:30:56",
     likes: 12,
   },
   {
     user_id: 5,
     post_content:
       "How can I implement real-time chat functionality in my web application using WebSocket?",
-    created_at: "2023-07-30 18:47:03",
+    created_at: "2023-06-30 18:47:03",
     likes: 4,
   },
   {
     user_id: 3,
     post_content:
       "What are some effective ways to prevent common security vulnerabilities in web applications?",
-    created_at: "2023-08-02 12:10:14",
+    created_at: "2023-07-02 12:10:14",
     likes: 11,
   },
   {
     user_id: 2,
     post_content:
       "I want to start contributing to open-source projects. Any advice on finding beginner-friendly projects?",
-    created_at: "2023-08-03 14:55:29",
+    created_at: "2023-07-03 14:55:29",
     likes: 5,
   },
   {
     user_id: 4,
     post_content:
       "How can I set up a continuous integration and continuous deployment (CI/CD) pipeline for my project?",
-    created_at: "2023-08-04 10:33:07",
+    created_at: "2023-07-04 10:33:07",
     likes: 8,
   },
   {
     user_id: 5,
     post_content:
       "I am curious about the latest trends in front-end web development. What technologies should I keep an eye on?",
-    created_at: "2023-08-06 09:22:44",
+    created_at: "2023-07-06 09:22:44",
     likes: 7,
   },
 ];
