@@ -128,6 +128,24 @@ function lightFunction() {
   element.classList.toggle("light-mode");
 }
 
+// Function to hide comment posting elements if a user is not logged in
+// Necessary because conditionally rendering these elements in handlebars wouldn't work
+const updateCommentElementVisibility = () => {
+  
+  const logged_in = document.body.getAttribute('data-logged-in');
+
+  // Check if the user is logged in and hide the comment input and button if not
+  const commentElementsToHide = document.querySelectorAll('.comment-hidden');
+  commentElementsToHide.forEach((element) => {
+    if (!logged_in) {
+      element.style.display = 'none'
+    }
+  });
+};
+
+document.addEventListener('DOMContentLoaded', updateCommentElementVisibility);
+
+
 document
   .querySelector('#logout-button')
   .addEventListener('click', logoutHandler);
