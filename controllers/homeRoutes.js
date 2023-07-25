@@ -45,11 +45,12 @@ router.get('/', async (req, res) => {
         },
       ],
       order: [['likes', 'DESC']],
-      limit: 4
+      limit: 4,
     });
 
     const trendingPosts = trendingData.map((post) => post.get({ plain: true }));
 
+    // Only include the user session in the rendering of the homepage if the user is logged in
     if (req.session.logged_in) {
       const user = await User.findByPk(req.session.user_id);
       //const user = await User.findByPk(1);
@@ -117,7 +118,7 @@ router.get('/user/:id', async (req, res) => {
         },
       ],
       order: [['likes', 'DESC']],
-      limit: 4
+      limit: 4,
     });
 
     const trendingPosts = trendingData.map((post) => post.get({ plain: true }));
@@ -184,7 +185,7 @@ router.get('/tag/:tag_name', async (req, res) => {
         },
       ],
       order: [['likes', 'DESC']],
-      limit: 4
+      limit: 4,
     });
 
     const trendingPosts = trendingData.map((post) => post.get({ plain: true }));
