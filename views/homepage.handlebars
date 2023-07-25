@@ -143,13 +143,14 @@ The main feed utilises forum board-adjacent tags as a filter for a single conten
 
             <input
               type='text'
-              class='cmnt-sec-post'
+              class='cmnt-sec-post comment-hidden'
               id='cmnt-text-{{post.post_id}}'
               maxlength={{getCharLimit}}
             />
             <button
               id='cmnt-button'
               onclick='newCommentHandler({{post.post_id}});'
+              class='comment-hidden'
             >Comment</button>
           </div>
 

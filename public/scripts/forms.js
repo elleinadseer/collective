@@ -1,10 +1,14 @@
 const loginFormHandler = async (event) => {
+  // Prevent default behaviour of submit button
   event.preventDefault();
 
+  // Get user's details from selected fields
   const user_email = document.querySelector('#email-login').value.trim();
   const user_password = document.querySelector('#password-login').value.trim();
 
+  // Check that both email and password have a value
   if (user_email && user_password) {
+    // Send a POST request to the login API endpoint
     const response = await fetch('/api/users/login', {
       method: 'POST',
       body: JSON.stringify({ user_email, user_password }),
@@ -12,6 +16,7 @@ const loginFormHandler = async (event) => {
     });
 
     if (response.ok) {
+      // Log the user in and display the homepage
       document.location.replace('/');
     } else {
       alert('Failed to log in.');
@@ -19,6 +24,7 @@ const loginFormHandler = async (event) => {
   }
 };
 
+// signupFormHandler behaves in much the same way as loginFormHandler
 const signupFormHandler = async (event) => {
   event.preventDefault();
 
@@ -41,6 +47,7 @@ const signupFormHandler = async (event) => {
   }
 };
 
+// Call correct form handler based on the submitted form
 document.addEventListener('submit', (event) => {
   const element = event.target;
 
