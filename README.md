@@ -24,7 +24,7 @@ We are proud of the outcome of this group project. Halfway through the project w
 
 ## Credits
 
-We have heavily relied on information taught through the modules of the bootcamp to carry our this project; is some instances copying and then editing code from the lessons of this module to fit our needs. 
+We have heavily relied on information taught through the modules of the bootcamp to carry our this project; in some instances copying and then editing code from the lessons of this module to fit our needs. 
 
 ## License
 
