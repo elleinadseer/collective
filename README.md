@@ -15,6 +15,9 @@ https://github.com/elleinadseer/tldr-web
 Link to website deployed through heroku:
 https://tldr-web-project-9c9c8ed89863.herokuapp.com/
 
+Presentation link:
+https://docs.google.com/presentation/d/1capCX8dU56HFh0AcqbMuLTM0YqvYsHSnU6vSjpKda88/edit?usp=sharing
+
 ## Development
 
 We are proud of the outcome of this group project. Halfway through the project we hit a slow point, the amount of code we had to implement for a group project of this size was overwhelming but we doubled down and met on multiple occasions outside of study sessions in order to push through the size of our codebase. Our wireframe from the outset of project was detailed enough that we kept to this design and did not deviate from it, simplifying the coding process.
